@@ -2,8 +2,8 @@
 
 ## 自訂義簡寫
 ```
-Row：欄位值
-Column：第一列
+Row：欄位
+Column：欄位值
 Table：表格
 Value：數值
 ?：運算符
@@ -11,6 +11,7 @@ Table1,2,3：不同的表格
 A1,2,3：表格別名
 A1.Row：表格中的欄位
 X,Y：欄位別名
+Type：資料型態
 ```
 ## Select：查詢
 ```
@@ -22,7 +23,7 @@ Select Distinct Row From Table;
 ```
 ## Where：選擇性地列出資料
 ```
-Selec Row From Table Where Column 條件 Value;
+Selec Row From Table Where Column ? Value;
 ```
 ## And/Or：複雜條件
 ```
@@ -94,4 +95,30 @@ Select "表格別名".Row as "欄位別名" From Table As "表格別名";
 ## Join 連接表格的概念，Where Table1.Row = Table2.Row 
 ```
 Select A1.Row As X,SUM(A2.Row) As Y From Table1 As A1 , Table2 As A2 Group  Where A1.Row = A2.Row Group By A1.Row;
+```
+## (+)：外部連接，兩格表格之中有一個欄位沒有相對應資料卻又想顯示出來（我全都要）
+```
+Select A1.Row , SUM(A2.Row) Y From Table1 A1 , Table2 A2 Where A1.Row = A2.Row (+) Group Bt A1.Row
+```
+## Create Table：建立表格
+```
+Create Table "Table" ( Row1 Type , Row2 Type , ....);
+```
+
+## Create Index：建立索引 
+```
+Create Index IDX_Row On Table( Row );
+```
+## Insert Into：輸入資料 
+```
+Insert Into Table(Row1,Row2,Row3) Values(Row1_Value,Row2_Value,Row3_Value);
+匯入：Insert Into Table1(Row1,Row2) Select Row1,Row2 From Table2 ;
+```
+## Update：更新資料 
+```
+Update "Table" Set "Row1" = [Value] Where column ? Value;
+```
+## Delete Form：刪除欄資料 
+```
+Delete From "Table" Where Row ? Value;
 ```
